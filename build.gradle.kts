@@ -1,7 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+
 plugins {
     kotlin("jvm") version "1.7.21"
+    id("org.flywaydb.flyway") version "9.8.1"
+
     application
 }
 
@@ -27,6 +30,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("org.flywaydb:flyway-core:9.8.1")
+    implementation("com.sksamuel.hoplite:hoplite-core:2.7.0")
 }
 
 tasks.test {
@@ -40,4 +45,9 @@ tasks.withType<KotlinCompile> {
 application {
     mainClass.set("MainKt")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=true")
+}
+
+flyway {
+    url = "jdbc:sqlite:${rootDir}/db/database.sqlite"
+    locations = arrayOf("filesystem:src/main/resources/db/migration")
 }
