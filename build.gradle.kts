@@ -15,6 +15,7 @@ repositories {
     mavenCentral()
 }
 
+val environment = System.getenv()
 val ktorVersion = "2.1.3"
 val KGraphQLVersion = "0.18.1"
 val exposedVersion = "0.40.1"
@@ -48,6 +49,6 @@ application {
 }
 
 flyway {
-    url = "jdbc:sqlite:${rootDir}/db/database.sqlite"
+    url = "jdbc:sqlite:${rootDir}/${environment["DATABASE__PATH"]}"
     locations = arrayOf("filesystem:src/main/resources/db/migration")
 }
