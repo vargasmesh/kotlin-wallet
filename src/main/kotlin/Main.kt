@@ -1,19 +1,13 @@
+import adapters.db.connectDatabase
 import com.apurebase.kgraphql.GraphQL
-import com.sksamuel.hoplite.ConfigLoaderBuilder
-import com.sksamuel.hoplite.sources.EnvironmentVariablesPropertySource
+import config.loadConfig
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import org.flywaydb.core.Flyway
 
 fun main(args: Array<String>) {
-    val config = ConfigLoaderBuilder.default()
-        .addPropertySource(EnvironmentVariablesPropertySource(true, true))
-        .build()
-        .loadConfigOrThrow<Config>()
-
-    Flyway.configure().dataSource("jdbc:sqlite:${config.database.path}", "", "").load().migrate()
-
+    val config = loadConfig()
+    val db = connectDatabase(config.database)
 
     embeddedServer(Netty, config.server.port, module = Application::module).start(wait = true)
 }
