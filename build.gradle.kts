@@ -19,6 +19,7 @@ val environment = System.getenv()
 val ktorVersion = "2.1.3"
 val KGraphQLVersion = "0.18.1"
 val exposedVersion = "0.40.1"
+val koinVersion = "3.2.2"
 
 dependencies {
     testImplementation(kotlin("test"))
@@ -33,6 +34,8 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
     implementation("org.flywaydb:flyway-core:9.8.1")
     implementation("com.sksamuel.hoplite:hoplite-core:2.7.0")
+    implementation("io.insert-koin:koin-core:$koinVersion")
+    implementation("org.javamoney:moneta:1.1")
 }
 
 tasks.test {
