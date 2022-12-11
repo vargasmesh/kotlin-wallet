@@ -36,6 +36,8 @@ dependencies {
     implementation("com.sksamuel.hoplite:hoplite-core:2.7.0")
     implementation("io.insert-koin:koin-core:$koinVersion")
     implementation("org.javamoney:moneta:1.1")
+    implementation("com.github.ksuid:ksuid:1.1.1")
+    implementation("com.google.code.gson:gson:2.8.5")
 }
 
 tasks.test {
