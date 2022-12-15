@@ -8,6 +8,6 @@ CREATE TABLE events (
 CREATE INDEX entity_timestamp ON events(entity_id, id);
 
 CREATE TABLE accounts (
-    id BINARY(20) PRIMARY KEY,
+    id VARCHAR(36) PRIMARY KEY,
     last_summary_event REFERENCES events(id) NOT NULL
 )
